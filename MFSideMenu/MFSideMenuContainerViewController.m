@@ -576,14 +576,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if(self.panDirection == MFSideMenuPanDirectionNone) {
         CGPoint translatedPoint = [recognizer translationInView:view];
         if(translatedPoint.x > 0) {
-            self.panDirection = MFSideMenuPanDirectionRight;
             if(self.leftMenuViewController && self.menuState == MFSideMenuStateClosed) {
+                self.panDirection = MFSideMenuPanDirectionRight;
                 [self leftMenuWillShow];
             }
         }
         else if(translatedPoint.x < 0) {
-            self.panDirection = MFSideMenuPanDirectionLeft;
             if(self.rightMenuViewController && self.menuState == MFSideMenuStateClosed) {
+                self.panDirection = MFSideMenuPanDirectionLeft;
                 [self rightMenuWillShow];
             }
         }
