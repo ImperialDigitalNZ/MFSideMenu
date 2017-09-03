@@ -22,6 +22,7 @@ typedef enum {
 
 @property (nonatomic, assign) CGPoint panGestureOrigin;
 @property (nonatomic, assign) CGFloat panGestureVelocity;
+@property (nonatomic, assign) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, assign) MFSideMenuPanDirection panDirection;
 
 @property (nonatomic, assign) BOOL viewHasAppeared;
@@ -36,6 +37,7 @@ typedef enum {
 @synthesize panMode;
 @synthesize panGestureOrigin;
 @synthesize panGestureVelocity;
+@synthesize panGesture;
 @synthesize menuState = _menuState;
 @synthesize panDirection;
 @synthesize leftMenuWidth = _leftMenuWidth;
@@ -273,6 +275,7 @@ typedef enum {
                                           initWithTarget:self action:@selector(handlePan:)];
 	[recognizer setMaximumNumberOfTouches:1];
     [recognizer setDelegate:self];
+    self.panGesture = recognizer;
     return recognizer;
 }
 
@@ -555,6 +558,9 @@ typedef enum {
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (gestureRecognizer == self.panGesture) {
+        return YES;
+    }
 	return NO;
 }
 
