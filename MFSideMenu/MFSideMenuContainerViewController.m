@@ -34,6 +34,7 @@ typedef enum {
 @synthesize rightMenuViewController = _rightSideMenuViewController;
 @synthesize menuContainerView;
 @synthesize panMode;
+@synthesize shouldRecognizeSimultaneously;
 @synthesize panGestureOrigin;
 @synthesize panGestureVelocity;
 @synthesize menuState = _menuState;
@@ -85,6 +86,7 @@ typedef enum {
     self.menuAnimationMaxDuration = 0.4f;
     self.panMode = MFSideMenuPanModeDefault;
     self.viewHasAppeared = NO;
+    self.shouldRecognizeSimultaneously = NO;
 }
 
 - (void)setupMenuContainerView {
@@ -555,11 +557,7 @@ typedef enum {
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if ([gestureRecognizer.view isKindOfClass:[UITableView class]]) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return self.shouldRecognizeSimultaneously;
 }
 
 
