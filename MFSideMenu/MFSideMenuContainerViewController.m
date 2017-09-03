@@ -275,6 +275,7 @@ typedef enum {
                                           initWithTarget:self action:@selector(handlePan:)];
 	[recognizer setMaximumNumberOfTouches:1];
     [recognizer setDelegate:self];
+    recognizer.cancelsTouchesInView = NO;
     self.panGesture = recognizer;
     return recognizer;
 }
@@ -558,9 +559,6 @@ typedef enum {
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if (gestureRecognizer != self.panGesture) {
-        return YES;
-    }
 	return NO;
 }
 
